@@ -27,12 +27,12 @@
         "migrate:schema": "APP_ENV=migration nest start",
         "migrate:seed": "APP_ENV=migration nestjs-command seed:apikey",
         "migrate:remove": "APP_ENV=migration nestjs-command remove:apikey",
-        "typeorm": "ts-node ./node_modules/typeorm/cli",
-        "migration:run": "npm run typeorm migration:run -- -d src/common/postgres/typeorm.config.ts",
-        "migration:generate": "npm run typeorm -- -d src/common/postgres/typeorm.config.ts migration:generate src/common/postgres/migrations/$npm_config_name",
+        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+        "migration:run": "npm run typeorm -- migration:run -d src/common/postgres/typeorm.config.ts",
+        "migration:generate": "npm run typeorm -- migration:generate -d src/common/postgres/typeorm.config.ts src/common/postgres/migrations/$npm_config_name",
         "migration:create": "npm run typeorm -- migration:create src/common/postgres/migrations/$npm_config_name",
-        "migration:revert": "npm run typeorm -- -d src/common/postgres/typeorm.config.ts migration:revert",
-        "migration:drop": "npm run typeorm -- -d src/common/postgres/typeorm.config.ts schema:drop"
+        "migration:revert": "npm run typeorm -- migration:revert -d src/common/postgres/typeorm.config.ts",
+        "migration:drop": "npm run typeorm -- schema:drop -d src/common/postgres/typeorm.config.ts"
     },
     "dependencies": {
         "@faker-js/faker": "^9.4.0",
@@ -45,6 +45,7 @@
         "@nestjs/core": "^11.0.7",
         "@nestjs/cqrs": "^11.0.3",
         "@nestjs/jwt": "^11.0.0",
+        "@nestjs/microservices": "^11.1.5",
         "@nestjs/mongoose": "^11.0.1",
         "@nestjs/passport": "^11.0.5",
         "@nestjs/platform-express": "^11.0.7",
